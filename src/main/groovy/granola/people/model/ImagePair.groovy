@@ -1,8 +1,6 @@
 package granola.people.model
 
-import java.awt.Image
-
-class ImagePair<E extends Image> {
+class ImagePair<E> {
 
     private E im1
     private E im2
@@ -12,6 +10,9 @@ class ImagePair<E extends Image> {
         this.im1 = im1
         this.im2 = im2
     }
+
+    E getImage_1() { return im1 }
+    E getImage_2() { return im2 }
 
     double getSimilarity() { return similarity }
     void setSimilarity(double similarity) { this.similarity = similarity }

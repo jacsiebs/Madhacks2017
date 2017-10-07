@@ -3,17 +3,15 @@ package granola.people.detection.api
 import granola.people.model.ImagePair
 import granola.people.model.ImageSet
 
-import java.awt.Image
-
-interface ObjectDetector {
-
-    // returns an overall similarity score for every image pairing
-    double computeSimilarity(ImageSet images)
+interface ObjectDetector<E> {
 
     // returns a similarity score for every pair of images
-    List<ImagePair> computeAllSimilarities(ImageSet images)
+    List<ImagePair> computeAllSimilarities(List<String> image_filenames)
 
-    // returns a similarity score for any 2 images
-    double computeSimilarity(Image im1, Image im2)
+    // computes the similarity for a single image pair
+    void computeSimilarity(ImagePair<E> pair)
+
+    // load the proper type of images given their filenames
+    ImageSet loadImageSet(List<String> filenames)
 
 }

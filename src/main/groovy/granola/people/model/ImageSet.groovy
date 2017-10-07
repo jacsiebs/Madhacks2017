@@ -1,8 +1,6 @@
 package granola.people.model
 
-import java.awt.Image
-
-class ImageSet<E extends Image> {
+class ImageSet<E> {
 
     private List<E> images
     private double similarity // average of all pair similarities

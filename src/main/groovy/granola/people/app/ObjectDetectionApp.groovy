@@ -1,7 +1,7 @@
 package granola.people.app
 
 import granola.people.detection.api.ObjectDetector
-import granola.people.detection.impl.pHash
+import granola.people.detection.impl.KeyPointsDetector
 import granola.people.model.ImagePair
 import granola.people.model.ImageSet
 import nu.pattern.OpenCV
@@ -15,6 +15,8 @@ class ObjectDetectionApp {
     private static Logger LOG = LoggerFactory.getLogger(ObjectDetectionApp.class)
 
     private static String TEST_SET_NAMES_FILE = "test_sets/image_set_names"
+    private static String IMAGE_DIR = "images/"
+
 
     // TODO inject this
     ObjectDetector detector
@@ -52,7 +54,7 @@ class ObjectDetectionApp {
         LOG.info("Object Detection App started")
 
         // *** YOUR IMPL HERE ***
-        detector = new pHash()
+        detector = new KeyPointsDetector()
 //        if(detector == null) {
 //            LOG.error("No ObjectDetection Impl found!")
 //            throw new RuntimeException()
@@ -67,23 +69,21 @@ class ObjectDetectionApp {
         // output file
         File resultsFile = new File("test_results/results")
         FileOutputStream resultStream = new FileOutputStream(resultsFile, false) // overwrites file
-        /* For every image set
-         *  1. Load its images
-         *  2. Run the detection algorithm on every pair of images in the set
-         *  3. Save results to file
-         */
+
         for(String set_name : image_set_names) {
-            ImageSet<BufferedImage> curr = loadImageSet(set_name)
+            List<String> image_filenames = filesInDir(set_name)
+
             // run the algorithm
-            List<ImagePair<BufferedImage>> image_pairs = detector.computeAllSimilarities(curr)
+            List<ImagePair> image_pairs = detector.computeAllSimilarities(image_filenames)
 
             // write results to a file
             StringBuilder str = new StringBuilder()
             str.append("********** ").append(set_name).append(" **********\n Image Pair Similarities:\n")
-            for(ImagePair<BufferedImage> pair : image_pairs) {
+            for(ImagePair pair : image_pairs) {
                 str.append("  ").append(pair.getSimilarity()).append("\n")
             }
-            str.append(" Overall Similarity: ").append(curr.getSimilarity()).append("\n\n")
+            str.append("\n")
+            //str.append(" Overall Similarity: ").append(curr.getSimilarity()).append("\n\n")
             byte[] content = str.toString().getBytes()
             resultStream.write(content)
         }
@@ -96,7 +96,7 @@ class ObjectDetectionApp {
         File names_file = new File(pathUrl.toURI())
         Scanner sc = new Scanner(names_file)
         while(sc.hasNextLine()) {
-            names.add(sc.nextLine())
+            names.add(IMAGE_DIR + sc.nextLine())
         }
         return names
     }
