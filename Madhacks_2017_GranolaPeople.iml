@@ -57,5 +57,6 @@
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-security:9.2.8.v20150217" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-webapp:9.2.8.v20150217" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-xml:9.2.8.v20150217" level="project" />
+    <orderEntry type="library" name="Maven: nu.pattern:opencv:2.4.9-4" level="project" />
   </component>
 </module>
