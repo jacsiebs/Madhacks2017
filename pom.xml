@@ -11,7 +11,7 @@
 
     <properties>
         <jersey.version>2.17</jersey.version>
-        <webservice.port>30000</webservice.port>
+        <webservice.port>30001</webservice.port>
         <webservice.main>granola.people.app.ObjectDetectionApp</webservice.main>
         <webservice.javaopts>-Xms128m -Xmx1g -XX:MaxPermSize=192m</webservice.javaopts>
         <deploy.service.name>${project.artifactId}</deploy.service.name>
@@ -24,9 +24,9 @@
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
             </resource>
-            <resource>
-                <directory>src/main/webapp</directory>
-            </resource>
+            <!--<resource>-->
+                <!--<directory>src/main/webapp</directory>-->
+            <!--</resource>-->
             <resource>
                 <directory>src/test/resources</directory>
             </resource>
