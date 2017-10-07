@@ -1,6 +1,6 @@
 package granola.people.app
 
-import granola.people.detection.api.ObjectDetector
+import granola.people.detection.api.Detector
 import granola.people.detection.impl.KeyPointsDetector
 import granola.people.model.ImagePair
 import granola.people.model.ImageSet
@@ -19,7 +19,7 @@ class ObjectDetectionApp {
 
 
     // TODO inject this
-    ObjectDetector detector
+    Detector detector
 
     static void main(String[] args) {
         OpenCV.loadLibrary()

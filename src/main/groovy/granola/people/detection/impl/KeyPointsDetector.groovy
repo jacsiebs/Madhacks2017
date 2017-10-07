@@ -1,31 +1,28 @@
-package granola.people.detection.impl;
+package granola.people.detection.impl
 
-import granola.people.detection.api.ObjectDetector;
-import granola.people.model.ImagePair;
-import granola.people.model.ImageSet;
-import org.openimaj.feature.local.list.LocalFeatureList;
-import org.openimaj.feature.local.matcher.FastBasicKeypointMatcher;
-import org.openimaj.feature.local.matcher.LocalFeatureMatcher;
-import org.openimaj.feature.local.matcher.MatchingUtilities;
-import org.openimaj.feature.local.matcher.consistent.ConsistentLocalFeatureMatcher2d;
-import org.openimaj.image.DisplayUtilities;
-import org.openimaj.image.FImage;
-import org.openimaj.image.ImageUtilities;
-import org.openimaj.image.MBFImage;
-import org.openimaj.image.colour.RGBColour;
-import org.openimaj.image.feature.local.engine.asift.ASIFTEngine;
-import org.openimaj.image.feature.local.keypoints.Keypoint;
-import org.openimaj.math.geometry.transforms.HomographyRefinement;
-import org.openimaj.math.geometry.transforms.estimation.RobustHomographyEstimator;
-import org.openimaj.math.model.fit.RANSAC;
+import granola.people.detection.api.Detector
+import granola.people.model.ImagePair
+import granola.people.model.ImageSet
+import org.openimaj.feature.local.list.LocalFeatureList
+import org.openimaj.feature.local.matcher.FastBasicKeypointMatcher
+import org.openimaj.feature.local.matcher.LocalFeatureMatcher
+import org.openimaj.feature.local.matcher.MatchingUtilities
+import org.openimaj.feature.local.matcher.consistent.ConsistentLocalFeatureMatcher2d
+import org.openimaj.image.DisplayUtilities
+import org.openimaj.image.FImage
+import org.openimaj.image.ImageUtilities
+import org.openimaj.image.MBFImage
+import org.openimaj.image.colour.RGBColour
+import org.openimaj.image.feature.local.engine.asift.ASIFTEngine
+import org.openimaj.image.feature.local.keypoints.Keypoint
+import org.openimaj.math.geometry.transforms.HomographyRefinement
+import org.openimaj.math.geometry.transforms.estimation.RobustHomographyEstimator
+import org.openimaj.math.model.fit.RANSAC
 import org.openimaj.util.pair.Pair
 import org.slf4j.Logger
-import org.slf4j.LoggerFactory;
+import org.slf4j.LoggerFactory
 
-import java.awt.*;
-import java.util.List;
-
-class KeyPointsDetector implements ObjectDetector<FImage> {
+class KeyPointsDetector implements Detector<FImage> {
 
     private static Logger LOG = LoggerFactory.getLogger(KeyPointsDetector.class)
 
@@ -62,8 +59,8 @@ class KeyPointsDetector implements ObjectDetector<FImage> {
 
         // Prepare the matcher, uncomment this line to use a basic matcher as
         // opposed to one that enforces homographic consistency
-        LocalFeatureMatcher<Keypoint> matcher = createFastBasicMatcher()
-        // final LocalFeatureMatcher<Keypoint> matcher = createConsistentRANSACHomographyMatcher()
+        // LocalFeatureMatcher<Keypoint> matcher = createFastBasicMatcher()
+        final LocalFeatureMatcher<Keypoint> matcher = createConsistentRANSACHomographyMatcher()
 
         // Find features in image 1
         matcher.setModelFeatures(input1Feats)

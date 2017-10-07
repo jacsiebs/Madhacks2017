@@ -3,7 +3,7 @@ package granola.people.detection.api
 import granola.people.model.ImagePair
 import granola.people.model.ImageSet
 
-interface ObjectDetector<E> {
+interface Detector<E> {
 
     // returns a similarity score for every pair of images
     List<ImagePair> computeAllSimilarities(List<String> image_filenames)
