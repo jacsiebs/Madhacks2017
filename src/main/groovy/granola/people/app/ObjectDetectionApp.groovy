@@ -4,16 +4,10 @@ import granola.people.detection.api.ObjectDetector
 import granola.people.detection.impl.pHash
 import granola.people.model.ImagePair
 import granola.people.model.ImageSet
-import org.eclipse.jetty.server.Server
-import org.eclipse.jetty.servlet.DefaultServlet
-import org.eclipse.jetty.servlet.ServletHolder
-import org.eclipse.jetty.webapp.WebAppContext
+import nu.pattern.OpenCV
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-
 import javax.imageio.ImageIO
-import javax.inject.Inject
-import java.awt.Image
 import java.awt.image.BufferedImage
 
 class ObjectDetectionApp {
@@ -26,7 +20,7 @@ class ObjectDetectionApp {
     ObjectDetector detector
 
     static void main(String[] args) {
-
+        OpenCV.loadLibrary()
         ObjectDetectionApp app = new ObjectDetectionApp()
 
 //        WebAppContext webAppContext = new WebAppContext(
